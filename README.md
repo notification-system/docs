@@ -88,6 +88,19 @@ Currently support 4 unique data/visual types:
 #### Custom Notification Ringtones
 * Ability to upload custom wav/mp3 sounds and configure the ringtones per category
 
+#### Full Notification History
+* Comprehensive tracking of all notification states and events
+* Detailed delivery status for each user:
+  - Sending → Delivered → Viewed → Accepted → Completed
+* Other included statuses:
+  - Escalation history (including reason)
+  - Undeliverable (including reason)
+  - Delayed
+  - Expired
+  - Reset
+  - Disabled
+  - Ended by the source system
+
 #### Notification Matching
 Default pattern for matching new notifications on any of the following:
 * Location ID
@@ -109,6 +122,10 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Simple ability to admit/update/discharge patients
 * Any service can easily get a local cache of the currently assigned patients
 * That readonly local cache is automatically synced with the source of truth
+
+### Cross-Platform Deep Linking
+* Uniform URLs work identically on Web/Android/iOS  
+* Every screen automatically linkable
 
 ### Key Patterns
 * **Automatic client synchronization** when backend data changes  
