@@ -88,10 +88,7 @@
 
 # Projects
 ## System.AppHost
-The main starting point to run a local instance of the notification system. This is build on top of .NET Aspire to help manage local environment.
-
-## Benchmarks
-Simple console app used to execute benchmark testing.
+The main starting point to run a local instance of the system. This is built on top of .NET Aspire to help manage local environment.
 
 ## TODO
 * Aliasing for locations

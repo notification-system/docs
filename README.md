@@ -1,4 +1,6 @@
-# High Level Overview
+# System Overview
+
+## High Level Key Points
 * Great developer experience
 * Multi platform support
 * Support for large enterprises
@@ -32,8 +34,7 @@ Ability to access native/unique features for each platform when necessary.
 
 ### Frontend
 * Extremely fast frontend UI development cycle with hot reload
-* Develop the frontend on any desktop platform.
-  * If you don't have an Android/iOS device, you can develop on Windows/Linux instead.
+* Develop the frontend on any desktop platform
 
 ## Enterprise Support
 * Support for large customers
@@ -69,11 +70,11 @@ Per notification category the following notification settings are possible:
 * Turn on the screen (Android only)
 * Unlock the device (Android only)
 * Notification Visual:
-  * Fullscreen - Opens directly to user (Android/Windows only)
+  * Fullscreen - Opens directly to the user (Android/Windows only)
   * Local Notification 
 * Vibrate (Android/iOS)
-* Option for manual completion by the accepting user
-  * User can mark the notification as finished which will remove it from their list of responsibilities
+* Manual completion by accepting user  
+  * Allows the user to mark notification as complete, removing it from their responsibility list
 * Expiration
 
 #### Custom Notifications
@@ -89,9 +90,9 @@ Currently support 4 unique data/visual types:
 
 #### Notification Matching
 Default pattern for matching new notifications on any of the following:
-* Location id
-* Patient id
-* Patient identifiers (MRN, SSN, Other Id)
+* Location ID
+* Patient ID
+* Patient identifiers (MRN, SSN, Other ID)
 * Location name (In progress)
 
 Makes it easier to integrate notifications from third-party systems with varying available data.
@@ -139,7 +140,10 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Deployed system using 'Production' environment
 * Publicly hosted over https
 
-## Key Weaknesses
-* Very few unit tests
-* The following elements are currently simulated/hardcoded: topology (64 rooms per unit, 20 units per facility, 20 facilities), users (20,000), and permissions.
-* No UI for currently connected devices
+## Under Construction
+* Unit tests
+* Simulated/hardcoded elements:
+  - Topology (64 rooms/unit, 20 units/facility, 20 facilities)
+  - Users (20,000 sample set)
+  - Permission
+* Device management UI

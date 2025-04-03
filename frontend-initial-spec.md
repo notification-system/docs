@@ -276,7 +276,7 @@ Per notification category the following notification settings are possible:
 ## Targeting Latest SDK versions
 * Android 15 (SDK 35)
 
-# Weak Point - Disclosures
+# Other Notes
 * Not a lot of unit tests for testing normal code.
 * Dart is not great for data models serialization. Uses code generation. Example: Doesn't handle polymorphism for swagger/openapi definitions
 * Mocking requires code generation
