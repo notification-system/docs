@@ -38,9 +38,10 @@ Ability to access native/unique features for each platform when necessary.
 
 ## Enterprise Support
 * Support for large customers
-  * 26,000+ locations
-  * 20,000+ users
-  * 3000+ notifications per second (Disk: Gen3 NVME, CPU: 7950x)
+* 3000+ notifications per second
+  * Disk: Gen3 NVMe, CPU: 7950x
+  * Notifications contain simulated payload data (non-empty content)
+  * Using a non-simple notification configuration (escalations, multiple users)
 * Distributed architecture where each service recovers individually
 
 ## Automation
@@ -158,6 +159,7 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Publicly hosted over https
 
 ## Under Construction
+* iOS persistent background connection
 * Unit tests
 * Simulated/hardcoded elements:
   - Topology (64 rooms/unit, 20 units/facility, 20 facilities)
