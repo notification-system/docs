@@ -96,3 +96,7 @@ The main starting point to run a local instance of the system. This is built on 
 * DateTime source of truth? If new event has older timestamp, then should it auto escalate or the timestamp assumed to be new relative to the notification system?
   * Initial thought: If the timestamp is older than current time, then assume the timestamp is correct and maybe there was a delay in receiving the notification. If the gap is large, then log it as warning.
   * If the timestamp is newer than current time, then assume the timestamp is incorrect. Process it as brand new notification but log an error. Maybe even a specific notification category for this error.
+
+## Other Info
+* None of the services communicate with each other directly (Call Rest API on another service)
+  * Avoided all designs that required that since it complicates the system

@@ -159,6 +159,7 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Publicly hosted over https
 
 ## Under Construction
+* Full system performance testing
 * iOS persistent background connection
 * Unit tests
 * Simulated/hardcoded elements:
