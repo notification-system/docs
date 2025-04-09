@@ -165,6 +165,7 @@ Per notification category the following notification settings are possible:
 * Repositories will listen to changes and update the cache with just the updates (most of the time) and broadcast the new cache to the requesting components.
 * Repositories will sync all the data after any reconnects to the notification broken or when the relevant service is restarted.
 * Repositories have a pattern where data refresh/sync only occurs after a relevant service is reconnected.
+* Pattern to check to memory leaks for repository that are not released.
 
 ## Integration Tests with Real Server or Mocks
 * Simple integration test to make sure the app launches on web
@@ -275,6 +276,13 @@ Per notification category the following notification settings are possible:
 
 ## Targeting Latest SDK versions
 * Android 15 (SDK 35)
+
+## Test Tool
+* Ability to generate any category of notification
+* Ability to generate a notification for any location within the system
+* Ability to open the history for any generated notification
+* Ability to track and end any generated notification
+* Performance testing
 
 # Other Notes
 * Not a lot of unit tests for testing normal code.
