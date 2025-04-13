@@ -272,7 +272,7 @@ Per notification category the following notification settings are possible:
 * Only one tab can be active at a time
 * Additional tabs will show an message indicating any other active tabs need to be closed before the new tab can function
 * Once the other tabs are closed, the new tab will automatically refresh to the same URL that was requested
-* WASM ready
+* WASM support
 
 ## Targeting Latest SDK versions
 * Android 15 (SDK 35)

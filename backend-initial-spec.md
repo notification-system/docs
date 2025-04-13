@@ -17,7 +17,8 @@
 * Immediately escalate the notification if there are no subscribers to the notification
 * Database migration stategy
 * Categories tree structure and settings manager
-* Open telemetry metrics for monitoring notification service. Including number of active notifications, number of pending updates, authenticated users, stored data count, ...etc.
+* Open telemetry metrics for monitoring notification service. Including number of active notifications, number of pending updates, authenticated users, stored data count, channel size ...etc.
+  * Some telemetry data is collected only when in Development environment
 * Safe history database saves. Check for duplicate key exceptions which could occur in rare scenario when crashing after database save but before acknowledgement to NATS.
 * If the Notification History service crashes, it will continue to save data where it left off after a restart
 * If connection to NATS is lost, the services will recover after NATS is available again.
@@ -100,3 +101,10 @@ The main starting point to run a local instance of the system. This is built on 
 ## Other Info
 * None of the services communicate with each other directly (Call Rest API on another service)
   * Avoided all designs that required that since it complicates the system
+* Optimized performance without micromanagement. However, the following optimizations could further enhance efficiency:
+  * MemoryPack Serialization – For faster serialization/deserialization.
+  * Minified Subscription Topics – To streamline message routing and reduce overhead.
+  * Spans – Reduce memory allocations and enable high-performance looping over buffers.
+* Code has good comments for non-trivial code paths
+* DTO, Database, Domain models separation
+* Source of truth pattern for the components within the service
