@@ -19,7 +19,6 @@
 * Categories tree structure and settings manager
 * Open telemetry metrics for monitoring notification service. Including number of active notifications, number of pending updates, authenticated users, stored data count, channel size ...etc.
   * Some telemetry data is collected only when in Development environment
-* Safe history database saves. Check for duplicate key exceptions which could occur in rare scenario when crashing after database save but before acknowledgement to NATS.
 * If the Notification History service crashes, it will continue to save data where it left off after a restart
 * If connection to NATS is lost, the services will recover after NATS is available again.
 * Undeliverable notifications

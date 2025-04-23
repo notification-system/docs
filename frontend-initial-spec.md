@@ -41,7 +41,7 @@
 * Automatically unlock device for configured alarms
 
 ## Localization Support
-* All user facing strings are localized. Just need to add the translations for the other languages.
+* All user facing strings are in a localization file. Just need to add the translations for the other languages.
 
 ## Audio
 * MP3 and WAV sound type support
