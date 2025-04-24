@@ -12,7 +12,7 @@
 
 ## Deep/Web Linking (Android/iOS/Web)
 * Url for WebApp and Schema for Android/iOS (Can be converted to universal links support)
-* Current schema for notificationapp:// and serverconfigapp://
+  * The same path and query parameters work for Android/iOS/Web
 * Every screen is accessible using URI automatically including parameter options
 * Stores the pending deep/web link request to be completed after successful login.
   * Clears the link if the app is inactive in between
@@ -27,11 +27,11 @@
 * User is notified when any rest API fails
 * Network related error codes are warnings. Other http status codes are errors.
 
-## Reliable Persistant Connection (Android/Linux/Windows)
+## Reliable Persistant Connection (Android/Linux/Windows and iOS foreground only for now)
 * CDAS compliant implementation
 * Notify user when the connection is lost/recovered
 * Configurable delay when the connection is lost
-* Handles automatic disconnects from the server.
+* Handles automatic disconnects from the server
 
 ### Special Android Settings
 * Wi-Fi and Wake Locks
@@ -48,9 +48,9 @@
 * Basic ringtone support using the Ringtone audio stream
 * Small collection of ringtones with Creative Commons Zero (CC0) license
 * Short vibration when the device is in a call (Android/iOS)
-* Disconnect local notification
-* Queueing and priority
-* Ability to upload/remove custom ringtones
+* Connection lost audio 
+* Queueing and priority for multiple ringtones
+* Ability to upload/update/remove custom ringtones
 * Max size and length restrictions
 * Server verifies valid sound files uploaded
 * Ability to play, pause, stop any ringtone with slider
@@ -60,10 +60,12 @@
 * Sound data and metadata is cached on the clients, simple update id version determines if anything needs to be updated
 * The client will only sync the changes
 
-## Local Notification Support (Android/iOS/Linux/Windows)
+## Local Notification Support
 * Local notifications for configured alarms
 * Opening alarms from local notifications
-* Grouping multiple notification (Android/iOS)
+* Local notification are automatically kept in sync to show only the user notification that require action (Android/iOS)
+  * If notification is accepted, ended, completed, expired, the local notification is removed
+* Grouping multiple notification (Android)
 
 ## Client Syncing Data or Reconnect
 * All relevant client data is syncronized after reconnect. Including new, updated, removed ringtones and current pending notifications.
@@ -71,7 +73,6 @@
 * Any notifications that occurred during disconnect period will be alerted to the user after reconnect.
   * This will be according to the configured ringtone and alert settings of each particular notification.
       * i.e. If the synced notification was full screen, it will alarm as full screen after reconnect.
-* These notifications updates are also alerted to the user on login if for some reason data was sent to the user while they were offline.
 
 ## FullScreen Notification View
 * This view can be automatically opened from any current view or background.
@@ -89,7 +90,7 @@
 ## Logging
 * Using logging service for client app
 * Open Telemetry Standard
-* Can easily export the logs to Grafana or Seq
+* Can easily export the logs to Grafana(currently using Seq)
 * Easily track all the information about any connected device
 * Tracks all failed API request
 
@@ -108,7 +109,7 @@ Per notification category the following notification settings are possible:
   * Public Announcement - announce to all users
 * Ringtone to play
 * Priority (used for audio and visual priority)
-* Minimum volume level (partial support in iOS)
+* Minimum volume level (Android, Windows, Linux, partial iOS)
 * Turn on the screen (Android only)
 * Unlock the device (Android only)
 * Notification Visual:
@@ -133,7 +134,7 @@ Per notification category the following notification settings are possible:
 * Light, Dark and System themes supported
 * Proper loading indicator for each action, disabling action waiting for response, global error/snackbar message queue
 * Entensible custom UI
-  * Numeric input control with validation, acceleation, default text options
+  * Numeric input control with validation, acceleration, default text options
   * Network related error UIs indicator
   * Snackbar messages and errors queues that handles message overloads
 * Relative and absolute timestamps with dynamic dates base on how long the notification occured.
@@ -143,7 +144,8 @@ Per notification category the following notification settings are possible:
 * Basic patient alarm notification just for visualization
   * Improved horizontal scrolling with fade to indicate more scrollable data
 * Custom UI for each notification type
-  * Undeliverable notification can show the full undelivered notification details
+  * Undeliverable notification can show the full notification details of the undelivered notification
+  * The undeliverable notification, only has a reference to the orginal notification and take up minimal storage
 * UI is automatically updated when the underlying data is changed on the backend.
   * This includes automatically updating the UI after reconnecting with the relevant service.
   * This includes all actions, additions, updates and deletes
@@ -157,6 +159,8 @@ Per notification category the following notification settings are possible:
     * Active Notifications List
     * Notification Details View
     * Notification History
+    * Patient Admit/Update/Discharge
+    * Public Announcements
 
 ## Observability (Shared Repository Pattern)
 * For always in sync data there is a shared repository concept
@@ -168,9 +172,8 @@ Per notification category the following notification settings are possible:
 * Pattern to check to memory leaks for repository that are not released.
 
 ## Integration Tests with Real Server or Mocks
-* Simple integration test to make sure the app launches on web
 * Automation testing code coverage report for the entire system (backend and frontend)
-* Can easily run these same automation tests on wide range of devices
+* Can run these same automation tests on wide range of devices
   * **Web**: Safari, Chrome,
   * **Desktop**: Windows, Linux, MacOS
   * **Android**: Any device type or API level
@@ -183,23 +186,36 @@ Per notification category the following notification settings are possible:
 
 ## Using JWT Tokens for security
 * Automatic refresh of access token when it expires
-* Refresh token management
+  * Each API request is automatically intercepted and if we get a 401, then we automatically refresh the access token, and retry the orginal API request
+* Refresh token management. Refresh tokens are recycled after each use.
 * Log off when refresh token expires
   * Plays disconnect ringtone and show log off reason to user
 * Only internal systems can publish notifications to the message bus
 * External system required access token and their notification are verified before publishing
-* Limit a single user to 40 roles
 * Multiple or single user session configuration
 * All public APIs are protected
 
 ## Notification profile screen
-* Lots of goodies here
 * Expand to show all categories
-* Collapse to show only the modified categories
-* Ability to export/import any notification profile settings (Windows/Mac/Web)
-* Small UI improvements to show disabled categories
+  * Option to show only categories that have different settings than the parent category
 * Ability to track and reset categories that have settings different from parent category
-* Removed absract roles are also remove from any assignments
+* Ability to add/remove escalation levels
+  * Can configure as many escalation levels as needed
+* Ability to export/import any notification profile settings
+* UI indicator to show disabled notification
+* Add/remove profile roles
+* Assign multiple roles per escalation level
+* Configure any notification setting per category
+* Configurable delay between each escalation level
+  * Including configurable initial delay for any notification
+* Ability to name/rename notification profiles
+* Ability to delete notification profiles
+
+## Ability to Select Notification Profile per Patient
+* Scenarios where different patient profiles can have different notification configurations
+* This opens up ability to assign patients based on teams. A notification profile can really be just a team.
+  * We can put patients without a team to a default team or have some orchestrator determine which team should take the patient
+  * This could depend on which team has least assigned patients per active members of the team
 
 ## Public Announcement
 * Public Announcements are announced to anyone associated with a particular location.
@@ -215,10 +231,11 @@ Per notification category the following notification settings are possible:
 ## Topology Notification Settings Screen
 * Keep track of the available roles
 * Automatically assign roles if names are the same
+* Reuse one or more notification profile configuration across multiple Units (or Facilities)
 
 ## Notification Statuses
 * Delivered status for each delivered notification
-* Seen status when the user manually opens the notification details view
+* Viewed status when the user manually opens the notification details view
 * Delivery summary report vs showing all status updates individually
 * Orange color to show escalation and progression of the notification
 * Green to show positive actions such as accept or condition ended
@@ -230,6 +247,10 @@ Per notification category the following notification settings are possible:
 * The high level state of each notification can be view from the list view
   * Active, accepted, inactive, undeliverable
 * The notification icon animates when the ringtone for that specific notification is being played
+* The user has two list of notifications
+  1. Active - Notifications that the user needs to Accept or Escalate
+  2. Active Responsibilities - Notification that the user has Accepted but are still active
+    - When the notification is ended, completed, expires, or reset, it is removed from the list of responsibilities.
 
 ## Number of Active Notifications Indicator
 * Gives user an indicator from other screens that there are pending notification that need to be handled
@@ -250,16 +271,11 @@ Per notification category the following notification settings are possible:
 * Can add a custom message to the alert
 * Select the alert code type by the color
 
-## Ability to Select Notification Profile per Patient
-* Scenarios where different patient profiles can have different notification configurations
-* This opens up ability to assign patients based on teams. A notification profile can really be just a team.
-  * We can put patients without a team to a default team or have some orchestrator determine which team should take the patient
-  * This could depend on which team has least assigned patients per active members of the team
-
 ## Patient Dashboard
 * View the assigned locations and the patients assigned to that location
 * Overview of the total number of active notifications for each location
 * Indicator if each notification is accepted or there are some pending notifications
+* All the active notification are being efficiently track for multiple locations. It is a matter of designing the UI to show the active notification for each location at the same time.
 
 ## Prevent Closing of Application
 * Android/iOS - Continues to function in background when logged in
@@ -272,6 +288,7 @@ Per notification category the following notification settings are possible:
 * Only one tab can be active at a time
 * Additional tabs will show an message indicating any other active tabs need to be closed before the new tab can function
 * Once the other tabs are closed, the new tab will automatically refresh to the same URL that was requested
+* Local notificaton permission is requested by the browser
 * WASM support
 
 ## Targeting Latest SDK versions
@@ -279,15 +296,28 @@ Per notification category the following notification settings are possible:
 
 ## Test Tool
 * Ability to generate any category of notification
+  * Ability to select/limit which category of notification should be generated
 * Ability to generate a notification for any location within the system
-* Ability to open the history for any generated notification
+* Ability to open the detailed notification view and status history for any generated notification
 * Ability to track and end any generated notification
-* Performance testing
+* One click performance testing
+  * This sets up the notification profile with multiple roles, escalation levels and different settings for a few category of notification.
+  * Then assigns that profile to all the units and maps the profile roles to the real roles of the unit.
+  * The test tool divides all the locations among the configure number of clients.
+  * Each client is setup:
+    * Authenticates
+    * Clears old assignments
+    * Retrieves the avialable roles for the assigned location(s)
+    * Assigns/Subscribes to all the roles for that assigned location(s)
+    * Connects to the MQTT broker
+    * Subscribes to the relevant topics
+    * Sends delivered response to each received notification
+  * A simple report is generated to show the total number of sent notifications and the number of notifications received by the clients
+* Client side logs including option to enable verbose logs are displayed by the test tool.
 
 # Other Notes
-* Not a lot of unit tests for testing normal code.
 * Dart is not great for data models serialization. Uses code generation. Example: Doesn't handle polymorphism for swagger/openapi definitions
 * Mocking requires code generation
 * No local(offline) demo mode (but we can instead host public test server for the sales folks)
-* Multi-Screen support for Windows
-* Have not deployed solution via Kubernetes yet
+* Weak Multi-Screen support for Windows - Would need to potentially write native Windows code to support this
+* No hot-reload support when developing for Web. Hot-restart does work.

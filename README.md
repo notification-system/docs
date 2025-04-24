@@ -64,10 +64,10 @@ Per notification category the following notification settings are possible:
 * Behavior:
   * Notify - alerts users according to the configuration
   * Disabled - do not alert any user
-  * Public Announcement - alerts all users
+  * Public Announcement - alerts all users associated with a particular location
 * Ringtone to play
 * Priority (used for audio and visual priority)
-* Minimum volume level (partial support in iOS)
+* Minimum volume level (Android, Windows, Linux, partial iOS)
 * Turn on the screen (Android only)
 * Unlock the device (Android only)
 * Notification Visual:
@@ -136,7 +136,7 @@ The notification pipeline is always monitored. If the notification pipeline is b
   ✓ Components needing the same data share a single repository instance  
   ✓ Data is loaded once from backend, kept updated by repository, and change notifications are broadcast to all components  
 * **Graceful API error handling**  
-  ✓ Client manages errors cleanly with user retry options  
+  ✓ Client manages errors cleanly with user retry options
 
 ### Long Term Storage
 * All notifications are stored
@@ -152,7 +152,7 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Ability to generate a notification for any location within the system
 * Ability to open the history for any generated notification
 * Ability to track and end any generated notification
-* Performance testing
+* One click performance testing
 
 ## Public Test System
 * Deployed system using 'Production' environment
