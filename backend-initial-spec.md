@@ -29,8 +29,6 @@
 * Undeliverable notification state when the notification cannot be delivered to end devices
   * Undeliverable scenarios: no configuration, no assigned roles, no assigned users, the users are offline, or the notification delivery was not confirmed by any device after reaching the end of escalation.
   * This also generated a configurable undeliverable notification
-* Matching notification by location id, patent internal id, patient identifiers (mrn, ssn, other id)
-  * TODO : Location name
 * The location active notifications list is automatically updated
 * Proper caching for almost all data that is read often
 * Proper CORS policy for current 'Production' server
@@ -87,6 +85,16 @@
 ## CDAS
 * Notification to the client when any part of the notification connection chain is broken.
 * Each point of failure is seperately indicated (MQTT, Notification Service, NATS, Unified Consumer)
+
+## Notification Matching
+Default pattern for matching new notifications on any of the following:
+* Location ID
+* Patient ID
+* Patient identifiers (MRN, SSN, Other ID)
+* Location name (In progress)
+
+Makes it easier to integrate notifications from third-party systems with varying available data.
+During matching, patient conflicts are detected. The resulting notification indicates a patient mismatch in such scenarios.
 
 # Projects
 ## System.AppHost
