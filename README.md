@@ -38,7 +38,7 @@ Ability to access native/unique features for each platform when necessary.
 
 ## Enterprise Support
 * Support for large customers
-* 3000+ notifications per second
+* 1000+ notifications per second paged to 20k users for 26k locations
   * Disk: Gen3 NVMe, CPU: 7950x
   * Notifications contain simulated payload data (non-empty content)
   * Using a non-simple notification configuration (escalations, multiple users)
@@ -156,7 +156,8 @@ The notification pipeline is always monitored. If the notification pipeline is b
 
 ## Public Test System
 * Deployed system using 'Production' environment
-* Publicly hosted over https
+* Web App: vigilantus.us
+* Test Tool: test.vigilantus.us
 
 ## Under Construction
 * Full system performance testing
@@ -165,5 +166,5 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Simulated/hardcoded elements:
   - Topology (64 rooms/unit, 20 units/facility, 20 facilities)
   - Users (20,000 sample set)
-  - Permission
+* Permissions
 * Device management UI

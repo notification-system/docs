@@ -1,4 +1,4 @@
-# Features Implemented
+# Vital Echo Overview
 
 ## Platform Support
 * Android
@@ -10,28 +10,31 @@
 * *MacOS* - Needs more testing. Likely requires additional entitlements or custom code for some native functionalities.
 * *Embedded Devices(Monitors)* - Potential to share some UI and packages across embedded devices.
 
+## Developer Experience
+* Best devlopment platform for Hot Reload and Hot Restart
+  * Instantaneously apply new code updates to the currently running app
+  * Fully develop new features using the same debug connection without recompiling the solution
+* Simultaneously debug the app on Desktop, Mobile and Web
+* Run the automation tests for any platform
+
 ## Deep/Web Linking (Android/iOS/Web)
 * Url for WebApp and Schema for Android/iOS (Can be converted to universal links support)
   * The same path and query parameters work for Android/iOS/Web
 * Every screen is accessible using URI automatically including parameter options
 * Stores the pending deep/web link request to be completed after successful login.
   * Clears the link if the app is inactive in between
-* Allow configuration where a single click of a dedicated button on hardened devices can be linked easily to any action in the app
+* Allows for configuration where a single click of a dedicated button on hardened devices can be easily linked to any action in the app
 
-## MTQQ 5 Client Support
-* Works using TCP on Native Platforms
-* Uses websockets for Web
+## REST APIs
+* Auto generated code for the data models and API's to keep the server and client in sync
+* Pattern to display any Rest API errors with ability for the user to retry
+  * Most screens also auto refresh content on reconnect or when the relevant service restarts.
+* Network related error codes are warnings. Other http status codes logged as errors.
 
-## REST API Communication Package
-* Auto generated code for the data models and API's
-* User is notified when any rest API fails
-* Network related error codes are warnings. Other http status codes are errors.
-
-## Reliable Persistant Connection (Android/Linux/Windows and iOS foreground only for now)
+## Reliable Persistant Connection (Android/Linux/Windows. Foreground only on iOS for now)
 * CDAS compliant implementation
-* Notify user when the connection is lost/recovered
-* Configurable delay when the connection is lost
-* Handles automatic disconnects from the server
+* Notify user when the connection is lost
+* Automatically recovers lost connection
 
 ### Special Android Settings
 * Wi-Fi and Wake Locks
@@ -39,6 +42,7 @@
 * Restart on device reboot
 * Automatically turn on screen for configured alarms
 * Automatically unlock device for configured alarms
+* Persistant background service
 
 ## Localization Support
 * All user facing strings are in a localization file. Just need to add the translations for the other languages.
@@ -67,13 +71,6 @@
   * If notification is accepted, ended, completed, expired, the local notification is removed
 * Grouping multiple notification (Android)
 
-## Client Syncing Data or Reconnect
-* All relevant client data is syncronized after reconnect. Including new, updated, removed ringtones and current pending notifications.
-* Local notifications are syncronized after reconnecting to the services.
-* Any notifications that occurred during disconnect period will be alerted to the user after reconnect.
-  * This will be according to the configured ringtone and alert settings of each particular notification.
-      * i.e. If the synced notification was full screen, it will alarm as full screen after reconnect.
-
 ## FullScreen Notification View
 * This view can be automatically opened from any current view or background.
 * The current notification content details are visible
@@ -94,9 +91,17 @@
 * Easily track all the information about any connected device
 * Tracks all failed API request
 
+## Client Syncing Data or Reconnect
+* All relevant client data is syncronized after reconnect. Including new, updated, removed ringtones, pending notifications, patient data, assignments, ...etc. Almost all UI is refreshed.
+  * Smart refresh. The data is syncronized only if the relevant service restarts. Restarts of unrelated services does not cause a data sync.
+* Local notifications are syncronized after reconnecting to the services.
+* Any notifications that occurred during disconnect period will be alerted to the user after reconnect.
+  * This will be according to the configured ringtone and alert settings of each particular notification.
+      * i.e. If the synced notification was full screen, it will alarm as full screen after reconnect.
+
 ## Frontend Storage
 * Simple key value pair storage with observable data
-* Native secure storage solutions (Web solution is experimental)
+* Native secure storage solutions
 
 ## Shared Data Model Auto Generation
 * OpenApi generation of the client Api and DTO Models
@@ -171,6 +176,10 @@ Per notification category the following notification settings are possible:
 * Repositories have a pattern where data refresh/sync only occurs after a relevant service is reconnected.
 * Pattern to check to memory leaks for repository that are not released.
 
+## MTQQ 5 Client Support
+* Works using TCP on Native Platforms
+* Uses websockets for Web
+
 ## Integration Tests with Real Server or Mocks
 * Automation testing code coverage report for the entire system (backend and frontend)
 * Can run these same automation tests on wide range of devices
@@ -187,13 +196,8 @@ Per notification category the following notification settings are possible:
 ## Using JWT Tokens for security
 * Automatic refresh of access token when it expires
   * Each API request is automatically intercepted and if we get a 401, then we automatically refresh the access token, and retry the orginal API request
-* Refresh token management. Refresh tokens are recycled after each use.
 * Log off when refresh token expires
   * Plays disconnect ringtone and show log off reason to user
-* Only internal systems can publish notifications to the message bus
-* External system required access token and their notification are verified before publishing
-* Multiple or single user session configuration
-* All public APIs are protected
 
 ## Notification profile screen
 * Expand to show all categories
@@ -233,15 +237,40 @@ Per notification category the following notification settings are possible:
 * Automatically assign roles if names are the same
 * Reuse one or more notification profile configuration across multiple Units (or Facilities)
 
-## Notification Statuses
-* Delivered status for each delivered notification
-* Viewed status when the user manually opens the notification details view
-* Delivery summary report vs showing all status updates individually
+## Notification Status/History
+* Comprehensive tracking of all notification states and events with the ability to view the full history of any notification.
+* Each status update includes the timestamp, action, update source
+* Custom data available for each status update
+  * i.e. For the sending status update we include the users to whom the notification was sent, escalation level of the notification
+* Two different views for showing the notification history
+  1. Quick view summary report
+  2. Show all status updates individually
 * Orange color to show escalation and progression of the notification
 * Green to show positive actions such as accept or condition ended
 * The ability to reset the notification after it was accepted
   * This will cause the notification to realarm and a new user will be able to accept the notification
 * The ability to manually complete (end) the notification by the user (if allowed by notification profile/category configuration)
+* Ability to view the notification status for each location level
+  * i.e. If the same notification is alarmed at both the facility level and room level
+
+### Possible Notification Statuses
+* User related statuses:
+  - Sending → Delivered → Viewed → Accepted → Completed
+* Other included statuses:
+  - Escalation
+    - by the User
+    - automatic escalation because there are no users at the current escalation level
+    - automatic escalation because the notification was not delivered to any device at the current escalation level
+    - automatic escalation because no user accepted the notification within the configured time period
+  - Undeliverable
+    - Location not found
+    - No notification profile exists
+    - Unable to deliver to any end device
+  - Delayed
+  - Expired
+  - Reset - the notification was reset by the user who accepted it
+  - Disabled - the notification is disabled in the configuration
+  - Ended - by the source system
 
 ## Notification List Views
 * The high level state of each notification can be view from the list view
