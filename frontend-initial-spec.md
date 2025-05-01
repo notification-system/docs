@@ -10,6 +10,8 @@
 * *MacOS* - Needs more testing. Likely requires additional entitlements or custom code for some native functionalities.
 * *Embedded Devices(Monitors)* - Potential to share some UI and packages across embedded devices.
 
+Ability to access native/unique features for each platform when necessary.
+
 ## Developer Experience
 * Best devlopment platform for Hot Reload and Hot Restart
   * Instantaneously apply new code updates to the currently running app
@@ -28,7 +30,7 @@
 ## REST APIs
 * Auto generated code for the data models and API's to keep the server and client in sync
 * Pattern to display any Rest API errors with ability for the user to retry
-  * Most screens also auto refresh content on reconnect or when the relevant service restarts.
+  * Most screens also auto refresh content on reconnect to MQTT or when the relevant service restarts.
 * Network related error codes are warnings. Other http status codes logged as errors.
 
 ## Reliable Persistant Connection (Android/Linux/Windows. Foreground only on iOS for now)
@@ -321,7 +323,10 @@ Per notification category the following notification settings are possible:
 * WASM support
 
 ## Targeting Latest SDK versions
+* Flutter 29.3
 * Android 15 (SDK 35)
+* iOS 18
+* All package references are recent
 
 ## Test Tool
 * Ability to generate any category of notification
@@ -344,9 +349,13 @@ Per notification category the following notification settings are possible:
   * A simple report is generated to show the total number of sent notifications and the number of notifications received by the clients
 * Client side logs including option to enable verbose logs are displayed by the test tool.
 
+## Developer Notes
+* Verbose logs when debugging
+* Verifies repository resources are properly released in debug mode (memory leak check)
+
 # Other Notes
-* Dart is not great for data models serialization. Uses code generation. Example: Doesn't handle polymorphism for swagger/openapi definitions
-* Mocking requires code generation
+* Dart uses code generation to support serialization.
+* Doesn't handle polymorphism for swagger/openapi definitions
 * No local(offline) demo mode (but we can instead host public test server for the sales folks)
-* Weak Multi-Screen support for Windows - Would need to potentially write native Windows code to support this
+* Weak Multi-Screen support for Windows - Would need to write native Windows code to support this
 * No hot-reload support when developing for Web. Hot-restart does work.
