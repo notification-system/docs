@@ -57,14 +57,13 @@ Ability to access native/unique features for each platform when necessary.
 * Connection lost audio 
 * Queueing and priority for multiple ringtones
 * Ability to upload/update/remove custom ringtones
+* Locked factory default ringtones
 * Max size and length restrictions
 * Server verifies valid sound files uploaded
 * Ability to play, pause, stop any ringtone with slider
-* Ability to change the sound name
-* Ability to upload a new sound without changing existing configuration
-* Locked factory default notification types
+* Ability to rename or upload a new sound without changing existing configuration
 * Sound data and metadata is cached on the clients, simple update id version determines if anything needs to be updated
-* The client will only sync the changes
+  * Each sound also has a version id so that the client will only sync the changes
 
 ## Local Notification Support
 * Local notifications for configured alarms
@@ -221,7 +220,7 @@ Per notification category the following notification settings are possible:
 * Scenarios where different patient profiles can have different notification configurations
 * This opens up ability to assign patients based on teams. A notification profile can really be just a team.
   * We can put patients without a team to a default team or have some orchestrator determine which team should take the patient
-  * This could depend on which team has least assigned patients per active members of the team
+  * This could depend on which team has least assigned patients per online members of the team
 
 ## Public Announcement
 * Public Announcements are announced to anyone associated with a particular location.
@@ -307,6 +306,11 @@ Per notification category the following notification settings are possible:
 * Overview of the total number of active notifications for each location
 * Indicator if each notification is accepted or there are some pending notifications
 * All the active notification are being efficiently track for multiple locations. It is a matter of designing the UI to show the active notification for each location at the same time.
+
+## Location/Patient Notifications
+* View the currently active notifications for any location
+* View the last 7 day history of all notifications for a specific location
+  * Note: Can modify this to be patient specific and not location based
 
 ## Prevent Closing of Application
 * Android/iOS - Continues to function in background when logged in
