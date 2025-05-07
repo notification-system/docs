@@ -27,6 +27,10 @@ Ability to access native/unique features for each platform when necessary.
   * Clears the link if the app is inactive in between
 * Allows for configuration where a single click of a dedicated button on hardened devices can be easily linked to any action in the app
 
+### View Notification History
+* Access the notification data and history for any notification by id
+  * Example: https://host/#/notifications/[id]
+
 ## REST APIs
 * Auto generated code for the data models and API's to keep the server and client in sync
 * Pattern to display any Rest API errors with ability for the user to retry
