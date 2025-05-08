@@ -337,6 +337,11 @@ Per notification category the following notification settings are possible:
 * All package references are recent
 
 ## Test Tool
+* Ability to one click to setup/config a new system. User is ready to receive notifications with a single click.
+  * Generate a default notification profile
+  * Assign the profile to the unit
+  * Map the unit roles to the notification profile roles
+  * Assign the default user the notification role to be able to receive notifications
 * Ability to generate any category of notification
   * Ability to select/limit which category of notification should be generated
 * Ability to generate a notification for any location within the system
