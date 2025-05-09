@@ -211,6 +211,7 @@ Per notification category the following notification settings are possible:
 * Ability to add/remove escalation levels
   * Can configure as many escalation levels as needed
 * Ability to export/import any notification profile settings
+  * User will be prompted when importing notification profiles the conflict with existing profiles. User can cancel the operation or force override.
 * UI indicator to show disabled notification
 * Add/remove profile roles
 * Assign multiple roles per escalation level
@@ -341,7 +342,8 @@ Per notification category the following notification settings are possible:
   * Generate a default notification profile
   * Assign the profile to the unit
   * Map the unit roles to the notification profile roles
-  * Assign the default user the notification role to be able to receive notifications
+  * Assign the default user the notification role for a room to be able to receive notifications
+  * Admit a default patient to the room
 * Ability to generate any category of notification
   * Ability to select/limit which category of notification should be generated
 * Ability to generate a notification for any location within the system
