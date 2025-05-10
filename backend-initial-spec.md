@@ -66,7 +66,7 @@ Default pattern for matching new notifications on any of the following:
 * Location ID
 * Patient ID
 * Patient identifiers (MRN, SSN, Other ID)
-* Location name (In progress)
+* Location name
 
 Makes it easier to integrate notifications from third-party systems with varying available data.
 During matching, patient conflicts are detected. The resulting notification indicates a patient mismatch in such scenarios.

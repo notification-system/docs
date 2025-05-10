@@ -62,7 +62,10 @@ Ability to access native/unique features for each platform when necessary.
 * Queueing and priority for multiple ringtones
 * Ability to upload/update/remove custom ringtones
 * Locked factory default ringtones
-* Max size and length restrictions
+* Max size restriction - 5 MB
+  * Server and client enforced
+* Max duration restriction - 20 seconds
+  * Server enforced
 * Server verifies valid sound files uploaded
 * Ability to play, pause, stop any ringtone with slider
 * Ability to rename or upload a new sound without changing existing configuration
