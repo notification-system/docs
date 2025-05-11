@@ -47,8 +47,8 @@ Ability to access native/unique features for each platform when necessary.
 ## Automation
 * Working automation pipeline
 * Automation code coverage report for the entire system (backend and frontend)
-  * Frontend Coverage: 45.6% (7227 out of 15856 actionable lines)
-  * Backend Coverage: 65.8% (9472 out of 14386 coverable lines)
+  * Frontend Coverage: 49.3% (8101 out of 16422 actionable lines)
+  * Backend Coverage: 68.2% (10103 out of 14803 coverable lines)
 * End to end automation test cases for receiving notifications
 * Ability to test any platform with same automation test cases
 

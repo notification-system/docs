@@ -87,6 +87,10 @@ Ability to access native/unique features for each platform when necessary.
   * This indicator will show you which notification is currently being view in relation to the full active list.
      * This is done by making the icon for the currently viewed notification larger than the others.
   * This indicator will animate the notification icon that matches the current ringtone that is audible.
+  * The notifications are sorted by priority
+* Notifications that are opened automatically in FullScreen mode are not immediately marked as view by the client
+  * This is because we don't know if the user is actually looking at the device sceen
+  * The notification will be marked as view after the user performs some action (including exiting the view)
 
 ## Core Shared Packages
 * Abstraction for logging in any package with verbose and other logs implemented across the system
@@ -189,8 +193,12 @@ Per notification category the following notification settings are possible:
 * Uses websockets for Web
 
 ## Integration Tests with Real Server or Mocks
-* Automation testing code coverage report for the entire system (backend and frontend)
-* Can run these same automation tests on wide range of devices
+* Working automation pipeline
+* Automation code coverage report for the entire system (backend and frontend)
+  * Frontend Coverage: 49.3% (8101 out of 16422 actionable lines)
+  * Backend Coverage: 68.2% (10103 out of 14803 coverable lines)
+* End to end automation test cases for receiving notifications
+* Ability to test any platform with same automation test cases
   * **Web**: Safari, Chrome,
   * **Desktop**: Windows, Linux, MacOS
   * **Android**: Any device type or API level
