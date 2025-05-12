@@ -1,7 +1,7 @@
 # System Overview
 
 ## Downloads
-* [Android](binaries/android-app.zip)
+* [Android](binaries/android-app.apk)
 * [Windows](binaries/windows-app.zip)
 
 ## High Level Key Points
