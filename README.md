@@ -1,5 +1,9 @@
 # System Overview
 
+## Downloads
+* [Android](binaries/android-app.zip)
+* [Windows](binaries/windows-app.zip)
+
 ## High Level Key Points
 * Great developer experience
 * Multi platform support
@@ -153,6 +157,7 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Ability to open the history for any generated notification
 * Ability to track and end any generated notification
 * One click performance testing
+* One click setup enviroment
 
 ## Public Test System
 * Deployed system using 'Production' environment
