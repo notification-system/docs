@@ -49,6 +49,9 @@ Ability to access native/unique features for each platform when necessary.
 * Automatically turn on screen for configured alarms
 * Automatically unlock device for configured alarms
 * Persistant background service
+* Single connection to the server
+  * Message bus between the UI and Background Service
+  * UI subscriptions are cleaned up when the UI is hidden
 
 ## Localization Support
 * All user facing strings are in a localization file. Just need to add the translations for the other languages.
@@ -203,6 +206,10 @@ Per notification category the following notification settings are possible:
   * **Desktop**: Windows, Linux, MacOS
   * **Android**: Any device type or API level
   * **iOS**: Any OS level
+* Intuitive automation pattern
+  * Each screen has an associate automation test help that helps with all navigation/actions related to that screen
+  * Very easy to read and maintain
+  * [Sample Test](samples/automation_notification_settings.dart)
 
 ## Simple Frontend Setup
 * The web front end automatically knows about all the endpoints, no setup required.
@@ -372,6 +379,7 @@ Per notification category the following notification settings are possible:
     * Connects to the MQTT broker
     * Subscribes to the relevant topics
     * Sends delivered response to each received notification
+    * Accepts each received notification 50% of the time
   * A simple report is generated to show the total number of sent notifications and the number of notifications received by the clients
 * Client side logs including option to enable verbose logs are displayed by the test tool.
 
