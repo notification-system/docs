@@ -51,8 +51,8 @@ Ability to access native/unique features for each platform when necessary.
 ## Automation
 * Working automation pipeline
 * Automation code coverage report for the entire system (backend and frontend)
-  * Frontend Coverage: 49.3% (8101 out of 16422 actionable lines)
-  * Backend Coverage: 68.2% (10103 out of 14803 coverable lines)
+  * Frontend Coverage: 64.2% (7297 out of 11370 actionable lines)
+  * Backend Coverage: 68.9% (10082 out of 14626 coverable lines)
 * End to end automation test cases for receiving notifications
 * Ability to test any platform with same automation test cases
 
@@ -80,6 +80,7 @@ Per notification category the following notification settings are possible:
 * Vibrate (Android/iOS)
 * Manual completion by accepting user  
   * Allows the user to mark notification as complete, removing it from their responsibility list
+* Reminder Interval
 * Expiration
 
 #### Custom Notifications
@@ -104,6 +105,7 @@ Currently support 4 unique data/visual types:
   - Expired
   - Reset
   - Disabled
+  - Reminder
   - Ended by the source system
 
 #### Notification Matching
