@@ -15,6 +15,7 @@
 * No dealing with nested nuget packages and maintaining tens of repos.
   * But you can still leverage the microservices architecture and horizontal scaling
 * Easily simulate service restart, service down scenarios
+* If necessary, can still link to services from external repositories
 
 ## State Recovery on Restarts
 * If any services crashes, on restart it will continue to function where it left off (unless there is a critical error)

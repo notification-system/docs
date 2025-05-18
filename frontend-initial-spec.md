@@ -75,6 +75,8 @@ Ability to access native/unique features for each platform when necessary.
 * Ability to rename or upload a new sound without changing existing configuration
 * Sound data and metadata is cached on the clients, simple update id version determines if anything needs to be updated
   * Each sound also has a version id so that the client will only sync the changes
+* Ringtone sound stops or is removed from queue if the underlying notification is no longer relevant
+  * e.g. The notification ends or a user accepted the notification
 
 ## Local Notification Support
 * Local notifications for configured alarms
