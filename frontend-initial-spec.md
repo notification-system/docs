@@ -294,7 +294,7 @@ Per notification category the following notification settings are possible:
   * This will cause the notification to realarm and a new user will be able to accept the notification
 * The ability to manually complete (end) the notification by the user (if allowed by notification profile/category configuration)
 * Ability to view the notification status for each location level
-  * i.e. If the same notification is alarmed at both the facility level and room level
+  * i.e. If the same notification is alerted at both the facility level and room level
 
 ### Possible Notification Statuses
 * User related statuses:
@@ -382,7 +382,7 @@ Per notification category the following notification settings are possible:
 * WASM support
 
 ## Targeting Latest SDK versions
-* Flutter 29.3
+* Flutter 32.0
 * Android 15 (SDK 35)
 * iOS 18
 * All package references are recent

@@ -127,6 +127,7 @@ All code paths that need to be modified to support new notification type are mar
 ## Other Info
 * None of the services communicate with each other directly (Call Rest API on another service)
   * Avoided all designs that required that since it complicates the system
+  * Can easily plug this system into a solution that has its own Topology Management, User Management and Patient Management.
 * Optimized performance without micromanagement. However, the following optimizations could further enhance efficiency:
   * MemoryPack Serialization – For faster serialization/deserialization (currently using JSON).
   * Minified Subscription Topics – To streamline message routing and reduce overhead.
