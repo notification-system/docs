@@ -328,13 +328,16 @@ Per notification category the following notification settings are possible:
 ## Custom Notification Categories
 * Ability to create/delete custom notification categories.
 * Custom categories can be a child of any factory or other custom categories.
+  * Deleting parent custom category will delete all child custom categories.
+* Custom categories can be configured separately for each notification profile, like any other category.
 * Ability to configure the following for the custom categories:
   1. Id
   2. Name
   3. Parent Category
-  4. Icon (SVG format)
+  4. Icon (SVG format) (Work in progress)
   5. Icon Color
   6. Animation Type
+* The client maintains the custom categories and uses the configured icon, color and animation type.
 * Allows a customer to build a small middleware to parse any custom data and send the data to the notification system using a new specific category with unique notification settings. This will not require a new version of the system.
 
 ## Number of Active Notifications Indicator
@@ -382,9 +385,9 @@ Per notification category the following notification settings are possible:
 * WASM support
 
 ## Targeting Latest SDK versions
-* Flutter 32.0
 * Android 15 (SDK 35)
 * iOS 18
+* Flutter 3.32.1
 * All package references are recent
 
 ## Test Tool
@@ -424,4 +427,3 @@ Per notification category the following notification settings are possible:
 * Doesn't handle polymorphism for swagger/openapi definitions
 * No local(offline) demo mode (but we can instead host public test server for the sales folks)
 * Weak Multi-Screen support for Windows - Would need to write native Windows code to support this
-* No hot-reload support when developing for Web. Hot-restart does work.
