@@ -216,8 +216,8 @@ Per notification category the following notification settings are possible:
 ## Integration Tests with Real Server or Mocks
 * Working automation pipeline
 * Automation code coverage report for the entire system (backend and frontend)
-  * Frontend Coverage: 64.2% (7297 out of 11370 actionable lines)
-  * Backend Coverage: 68.9% (10082 out of 14626 coverable lines)
+  * Frontend Coverage: 64.5% (8320 out of 12897 actionable lines)
+  * Backend Coverage: 69.7% (10626 out of 15239 coverable lines)
 * End to end automation test cases for receiving notifications
 * Ability to test any platform with same automation test cases
   * **Web**: Safari, Chrome,
@@ -338,6 +338,8 @@ Per notification category the following notification settings are possible:
   5. Icon Color
   6. Animation Type
 * The client maintains the custom categories and uses the configured icon, color and animation type.
+* Required fields are indicated when attempting to save or update with missing data
+* Validation of new category ids to make sure they don't interfere with reserved system ids and other categories
 * Allows a customer to build a small middleware to parse any custom data and send the data to the notification system using a new specific category with unique notification settings. This will not require a new version of the system.
 
 ## Number of Active Notifications Indicator
@@ -427,3 +429,4 @@ Per notification category the following notification settings are possible:
 * Doesn't handle polymorphism for swagger/openapi definitions
 * No local(offline) demo mode (but we can instead host public test server for the sales folks)
 * Weak Multi-Screen support for Windows - Would need to write native Windows code to support this
+* Poor stacktraces on Web in release mode
