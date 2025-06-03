@@ -214,10 +214,12 @@ Per notification category the following notification settings are possible:
 * Uses websockets for Web
 
 ## Integration Tests with Real Server or Mocks
-* Working automation pipeline
+* Working automation CI pipeline
+  * Backend is tested on Windows and MacOS
+  * Frontend is tested on Android, iOS, and Windows 
 * Automation code coverage report for the entire system (backend and frontend)
-  * Frontend Coverage: 64.5% (8320 out of 12897 actionable lines)
-  * Backend Coverage: 69.7% (10626 out of 15239 coverable lines)
+  * Frontend Coverage: 64.9% (8375 out of 12897 actionable lines)
+  * Backend Coverage: 69.7% (10629 out of 15239 coverable lines)
 * End to end automation test cases for receiving notifications
 * Ability to test any platform with same automation test cases
   * **Web**: Safari, Chrome,
