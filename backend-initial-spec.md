@@ -19,7 +19,7 @@
 * If necessary, can still link to services from external repositories
 
 ## State Recovery on Restarts
-* If any services crashes, on restart it will continue to function where it left off (unless there is a critical error)
+* If any service crashes, on restart it will continue to function where it left off (unless there is a critical error)
 * This includes the state of any previously active notifications
 * There are 3 modes of state recovery on restart for the notification service
   * 1. We try to recover all previous active data and make sure we properly notify clients for all notifications, including notifications that occurred during downtime
@@ -49,17 +49,17 @@
 * Easy to debug/view/modify storage data for the full system
 * Data for cold storage is in a separate database which would make archiving easier
 
-## Distributed Patient Cache
+## Distributed Assigned Patient Cache
 * Distributed patient cache for fast local access by services that need it frequently
-* Eventual sync mechanism to make sure the distribute cache gets updated after any kind of connection issues
-* This includes making sure the cache efficiently syncs after a potential crash during which the patient update is stored to the source db and but crashes before updating the distribute cache.
-* Resetting the NATS distributed cache if the patient data source of truth is reset.
+* Eventual sync mechanism to make sure the distributed cache gets updated after any kind of connection issues
+* This includes making sure the cache efficiently syncs after a potential crash during which the patient update is stored to the source db and but crashes before updating the distributed cache.
+* Resetting the distributed cache if the patient data source of truth is reset.
   * Makes sure any existing connected readonly caches are efficiently reset if the distributed cache is reset.
-* Making sure the entire patient data is sent to NATS after new instance of NATS is used
-* Resetting the distributed cache in scenario where our pending updates to the cache are larger than the channel size
+* Making sure the entire patient data is sent to the distributed cache after a new instance of the distributed cache is created
+* Resetting the distributed cache in scenarios where the pending updates to the cache are larger than the channel size
 
 ## Notification at Enterprise, Facility levels
-* Depending on configuration, all notifications generated at lower level can be handle at the parent location level
+* Depending on configuration, all notifications generated at a lower level can be handle at the parent location level
 * The notification can be handled differently at each level, they each have their own escalation and notification settings
 * Restoring notification state works for each level
 * The main notification data is not duplicated, neither are status updates that affect the notification at all locations
@@ -108,7 +108,7 @@ All code paths that need to be modified to support a new notification type are m
 
 ## User Session Control
 * Configurable max user session period. This is the validity period of the refresh token managed by the backend.
-* Configurable max number of sessions a single user can have. The oldest session will be kick off if the number surpasses the configuration.
+* Configurable max number of sessions a single user can have. The oldest session will be kicked off if the number surpasses the configured limit.
   * The device with the ended session is immediately logged off if it is online with a message to the user.
   * By enabling multiple sessions, this allows the user to maintain their login on mobile but still connected to a desktop or web version at the same time.
 * All user data/state is maintained by the backend. This means the user can seamlessly log in on a different device without losing any data/configuration.
@@ -127,16 +127,16 @@ All code paths that need to be modified to support a new notification type are m
 * Each service capable of gracefully handling network issues or other service restarts.
   * i.e. If history service crashes it will continue from where it left off on restart. MQTT unreachable, messages will queue until MQTT is available again.
 * Notification service maintains only simpler notification data models. Larger custom data is only available in the history service.
-  * This allows for hundreds of thousands or even millions of active notification at a time.
+  * This allows for hundreds of thousands or even millions of active notifications at a time.
 * Proper caching for almost all data that is read often
-* Proper CORS policy for current 'Production' server
+* Proper CORS policy for the current 'Production' server
 
 # System Debugging
 * Easy to use development tools available via Aspire
 * Ability to view all traces across the entire system
 * View, filter logs for all or individual services
 * Monitor metrics for performance investigation across the system
-* Dashboard to monitor health of the system and indicates any errors that may have occurred
+* Dashboard to monitor the health of the system and indicate any errors that may have occurred
 * View environment variables, references, resources of any individual service
 * Access and test any Rest API for any service from the dashboard
 * Web based frontend app and test tool embedded into the backend service
@@ -152,4 +152,4 @@ All code paths that need to be modified to support a new notification type are m
 * Code has good comments for non-trivial code paths
 * DTO, Database, Domain models separation
 * Source of truth pattern for the data sources within the service
-* All APIs that require finding patient, location, notification, user, assignment, ringtone, or any unbounded list are accessed with some form of Hashmap
+* All APIs that require finding patient, location, notification, user, assignment, ringtone, or any unbounded list are accessed with some form of hash map

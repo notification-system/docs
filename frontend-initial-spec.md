@@ -82,8 +82,8 @@ Ability to access native/unique features for each platform when necessary.
 * This view can be automatically opened from any current view or background.
 * The current notification content details are immediately visible
 * User can scroll through any other currently active notification
-* There is a total active notifications indicator that shows all the current active notification by their icons
-  * This indicator will show you which notification is currently being view in relation to the full active list.
+* There is a total active notifications indicator that shows all the current active notifications by their icons
+  * This indicator will show you which notification is currently being viewed in relation to the full active list.
      * This is done by making the icon for the currently viewed notification larger than the others.
   * This indicator will animate the notification icon that matches the current ringtone that is audible.
   * The notifications are sorted by priority
@@ -112,9 +112,9 @@ Per notification category the following notification settings are possible:
   * Notify - notify to the users based on the configuration
   * Disabled - do not notify to anyone
   * Public Announcement - announce to all users
-  * Notify and Announce - combination of announcing to all users and also notify to the users based on the configuration so that the notification can be handled
+  * Notify and Announce - combination of announcing to all users and also notifying to the users based on the configuration so that the notification can be handled
     * Conflict logic on the client to prioritize the direct notification instead of the public announcement if the client receives both.
-      * i.e. Tapping the local notification will navigate to the notification for the user and not the public announcement.
+      * i.e. Only one local notification is generated and tapping the local notification will navigate to the notification for the user and not the public announcement.
 * Ringtone to play
 * Priority (used for audio and visual priority)
 * Minimum volume level (Android, Windows, Linux, partial iOS)
