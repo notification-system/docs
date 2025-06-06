@@ -51,8 +51,8 @@ Ability to access native/unique features for each platform when necessary.
 ## Automation
 * Working automation pipeline
 * Automation code coverage report for the entire system (backend and frontend)
-  * Frontend Coverage: 64.9% (8375 out of 12897 actionable lines)
-  * Backend Coverage: 69.7% (10629 out of 15239 coverable lines)
+  * Frontend Coverage: 65.6% (8465 out of 12900 actionable lines)
+  * Backend Coverage: 73.7% (11308 out of 15325 coverable lines)
 * End to end automation test cases for receiving notifications
 * Ability to test any platform with same automation test cases
 
@@ -167,7 +167,6 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Test Tool: test.vigilantus.us
 
 ## Under Construction
-* Full system performance testing
 * iOS persistent background connection
 * Unit tests
 * Simulated/hardcoded elements:
