@@ -155,7 +155,7 @@ Per notification category the following notification settings are possible:
 * Can navigate the UI using keyboard instead of mouse
 * Light, Dark and System themes supported
 * Proper loading indicator for each action, disabling relevant actions while waiting for response, global error/snackbar message queue
-* Standard confirmation popup UI for delete actions
+* Standard confirmation popup UI for delete actions with custom UI for async actions
 * Extensible custom UI
   * Numeric input control with validation, acceleration, default text options
   * Network related error UIs indicator
