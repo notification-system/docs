@@ -173,18 +173,22 @@ Per notification category the following notification settings are possible:
   * This includes automatically updating the UI after reconnecting with the relevant service.
   * This includes all actions, additions, updates and deletes
   * This is implemented for the following screens:
+    * Home Dashboard
     * Notification Profiles List
     * Specific Notification Profile Details
     * Category Alert Settings
     * All Sounds
     * Specific Sound
     * Notification System Settings
-    * Active Notifications List
+    * Authentication System Settings
+    * Active Notifications List (including FullScreen Notifications)
     * Notification Details View
     * Notification History
     * Patient Admit/Update/Discharge
     * Public Announcements
     * Custom Categories
+    * Location Notification Settings
+    * Role Assignments Selection
 
 ## Observability (Shared Repository Pattern)
 * For always in sync data there is a shared repository concept
