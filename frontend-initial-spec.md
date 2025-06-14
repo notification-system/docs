@@ -92,10 +92,10 @@ Ability to access native/unique features for each platform when necessary.
   * The notification will be marked as view after the user performs some action (including exiting the view)
 
 ## Client Syncing Data or Reconnect
-* All relevant client data is synchronized after reconnect. Including new, updated, removed ringtones, pending notifications, patient data, assignments, ...etc. Almost all UI is refreshed.
+* All relevant client data is synchronized after reconnect. Including new, updated, removed ringtones, pending notifications, patient data, assignments, ...etc.
   * Smart refresh. The data is synchronized only if the relevant service restarts. Restarts of unrelated services does not cause a data sync.
 * Local notifications are synchronized after reconnecting to the services.
-* Any notifications that occurred during disconnect period will be alerted to the user after reconnect.
+* Any notifications that occurred during disconnect period will be alerted to the user after a reconnect if they are still active.
   * This will be according to the configured ringtone and alert settings of each particular notification.
       * i.e. If the synced notification was full screen, it will alarm as full screen after reconnect.
 
@@ -143,33 +143,40 @@ Per notification category the following notification settings are possible:
 
 ## User Topology Management
 * User is automatically shown the locations specific to their roles
-* User is automatically drilled down to show locations if they don't have multiple unit or facility access
+* User is automatically drilled down to show rooms if they don't have multiple unit or facility access
+  * i.e. If the user has access to just one unit, then they will only see the rooms for that unit.
 
 ## Manage Subscriptions
 * Each role change is efficiently updated in the backend for each click
-* User is limited to 150 different subscription topics
+* User is limited to 150 different assigned roles
 
 ## UI
 * Persistent navigation backstack even for app restarts
 * Automatic UI scaling from small phone to full desktop monitor
 * Can navigate the UI using keyboard instead of mouse
 * Light, Dark and System themes supported
-* Proper loading indicator for each action, disabling relevant actions while waiting for response, global error/snackbar message queue
-* Standard confirmation popup UI for delete actions with custom UI for async actions
+* Proper loading indicator for each action. Including disabling of relevant actions while waiting for response.
+* Snackbar message/error queue
+  * If multiple snackbar messages/errors need to display they will appear one after the other.
+  * Control how long each message/error displays to the user
+  * If there are more than 2 messages queued, the duration is shortened.
+  * If there are more than 4 messages queued, the excess messages are grouped together.
+* Standard confirmation popup UI for delete actions with custom UI(loading indicator) for async actions
 * Extensible custom UI
   * Numeric input control with validation, acceleration, default text options
   * Network related error UIs indicator
-  * Snackbar messages and errors queues that handles message overloads
-* Relative and absolute timestamps with dynamic dates base on how long the notification occurred.
-  * Tooltips to show the full relevant time
-  * Relative time automatically updates
-  * Localized with plurals vs singulars
+* Inline validation and error messages for required fields
+  * i.e. username, custom category fields, patient lastname, ... etc.
+* Standard timestamps UI across the entire app that can be configured to show the absolute or relative timestamp
+  * Tooltips to show the full relevant time (hover on desktop or tap on mobile)
+  * Relative timestamps automatically update every 5 seconds
+    * Localized with plurals vs singulars
 * Basic patient alarm notification just for visualization
   * Improved horizontal scrolling with fade to indicate more scrollable data
 * Custom UI for each notification type
   * Undeliverable notification can show the full notification details of the undelivered notification
   * The undeliverable notification, only has a reference to the original notification and takes up minimal storage
-* UI is automatically updated when the underlying data is changed on the backend.
+* All UI is automatically updated when the underlying data is changed on the backend.
   * This includes automatically updating the UI after reconnecting with the relevant service.
   * This includes all actions, additions, updates and deletes
   * This is implemented for the following screens:
@@ -195,7 +202,7 @@ Per notification category the following notification settings are possible:
 * Different components can access any repository they care about
 * Multiple components that need the same repository will retrieve the same one from the active pool
 * Repositories will listen to changes and update the cache with just the updates (most of the time) and broadcast the new cache to the requesting components.
-* Repositories will sync all the data after any reconnects to the notification broken or when the relevant service is restarted.
+* Repositories will sync all the data after any reconnects to the notification Mqtt broker or when the relevant service is restarted.
 * Repositories have a pattern where data refresh/sync only occurs after a relevant service is reconnected.
 * Pattern to check for memory leaks for repository that are not released properly.
 
@@ -203,7 +210,7 @@ Per notification category the following notification settings are possible:
 * Works using TCP on Native Platforms
 * Uses websockets for Web
 
-## Integration Tests with Real Server or Mocks
+## Integration Tests with Real Server
 * Working automation CI pipeline
   * Backend is tested on Windows and MacOS
   * Frontend is tested on Android, iOS, and Windows 
@@ -223,9 +230,9 @@ Per notification category the following notification settings are possible:
   * [Sample Test](samples/automation_notification_settings.dart)
 
 ## Simple Frontend Setup
-* The web front end automatically knows about all the endpoints, no setup required.
-* The mobile/native implementation just need the initial setup configuration endpoint
-  * Only the hostname is required, the app automatically distinguishes between production environment and development. Including https or http.
+* The Web version of the app automatically knows about all the endpoints within the system, no setup required.
+* The Mobile/Native implementation just need the initial setup configuration endpoint
+  * Only the hostname is required, the app automatically distinguishes between production environment and development. Including https vs http or ws vs wss.
 
 ## Using JWT Tokens for security
 * Automatic refresh of access token when it expires
@@ -269,10 +276,15 @@ Per notification category the following notification settings are possible:
   * The notification can still also alarm based on the escalation level
   * Handling scenario where the ringtone is played only once when a user receives an active notification they need to address and the public announcement for the same event.
 
-## Topology Notification Settings Screen
-* Keep track of the available roles
-* Automatically assign roles if names are the same
-* Reuse one or more notification profile configuration across multiple Units (or Facilities)
+## Location Notification Settings Screen
+* Ability to setup the notification profiles for the Enterprise, Facility or Unit
+* Ability to quickly search existing notification profile and assign it to the location
+* Ability to assign/unassign the notification profile role to the actual role within a location.
+  * Can assign multiple location roles for a single notification profile role
+* The system will automatically assign roles if names are the same
+  * i.e. If a "Nurse" notification profile role exists, it will auto map to the "Nurse" location role
+* Select the default notification profile for the location if multiple profiles are assigned
+* Allows the same notification profile to be used across multiple Units (or Facilities)
 
 ## Notification Status/History
 * Comprehensive tracking of all notification states and events with the ability to view the full history of any notification.
@@ -281,9 +293,10 @@ Per notification category the following notification settings are possible:
   * i.e. For the sending status update we include the users to whom the notification was sent, escalation level of the notification
 * Two different views for showing the notification history
   1. Quick view summary report
+    - Groups all status for one user into one row per escalation level
   2. Show all status updates individually
-* Orange color to show escalation and progression of the notification
-* Green to show positive actions such as accept or condition ended
+* Orange color used to show status updates that escalate or progress the notification
+* Green to show positive actions such as accepted, condition ended or notification was marked as completed.
 * The ability to reset the notification after it was accepted
   * This will cause the notification to realarm and a new user will be able to accept the notification
 * The ability to manually complete (end) the notification by the user (if allowed by notification profile/category configuration)
@@ -294,16 +307,16 @@ Per notification category the following notification settings are possible:
 * User related statuses:
   - Sending → Delivered → Viewed → Accepted → Completed
 * Other included statuses:
-  - Escalation
+  - Escalation (includes reason)
     - by the User
     - automatic escalation because there are no users at the current escalation level
     - automatic escalation because the notification was not delivered to any device at the current escalation level
     - automatic escalation because no user accepted the notification within the configured time period
-  - Undeliverable
+  - Undeliverable (includes reason)
     - Location not found
     - No notification profile exists
     - Unable to deliver to any end device
-  - Delayed
+  - Delayed (includes delayed period)
   - Expired
   - Reset - the notification was reset by the user who accepted it
   - Disabled - the notification is disabled in the configuration
@@ -320,7 +333,7 @@ Per notification category the following notification settings are possible:
     - When the notification is ended, completed, expires, or reset, it is removed from the list of responsibilities.
 
 ## Custom Notification Categories
-* Ability to create/delete custom notification categories.
+* Ability to create/delete/update custom notification categories.
 * Custom categories can be a child of any factory or other custom categories.
   * Deleting parent custom category will delete all child custom categories.
 * Custom categories can be configured separately for each notification profile, like any other category.
@@ -337,7 +350,7 @@ Per notification category the following notification settings are possible:
 * Allows a customer to build a small middleware to parse any custom data and send the data to the notification system using a new specific category with unique notification settings. This will not require a new version of the system.
 
 ## Number of Active Notifications Indicator
-* Gives user an indicator from other screens that there are pending notification that need to be handled
+* Provides the user an indicator from that there are pending notification that need to be handled
 * Shows loading indicator then '?' if we cannot reach the server
 
 ## Simple Patient Management Solution
@@ -347,7 +360,7 @@ Per notification category the following notification settings are possible:
 * Automatically refresh the details of the currently viewed patient if the backend changes
 
 ## Create Code Alerts
-* Ability to create code alert from the frontend
+* Ability to create code alert from the frontend app
 * Swipe right to left anywhere to bring up additional menu from which you can select to create code alert
 * On non-mobile devices, this menu can be brought up using Ctrl + M
 * Automatically populates the lowest location that the current user has access to.
@@ -415,7 +428,7 @@ Per notification category the following notification settings are possible:
 ## Targeting Latest SDK versions
 * Android 15 (SDK 35)
 * iOS 18
-* Flutter 3.32.1
+* Flutter 3.32.3
 * All package references are recent
 
 ## Test Tool
@@ -449,7 +462,7 @@ Per notification category the following notification settings are possible:
   * A simple report is generated to show the total number of sent notifications and the number of notifications received by the clients at the end of the test.
   * Test tool automatically stops (with an error message) if the server or the test tool is unable to maintain the configured throughput.
 * Client(test tool) side logs including option to enable verbose logs are displayed by the test tool.
-  * Since the test tool shares the code with the real app, this includes logs that would be output by the real app.
+  * Since the test tool partly shares the same code with the real app, this includes logs that would be output by the real app.
   * Logs are color coded based on the severity
   * In-memory logs are rotated after 1000 logs.
 

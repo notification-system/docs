@@ -57,6 +57,7 @@
   * Makes sure any existing connected readonly caches are efficiently reset if the distributed cache is reset.
 * Making sure the entire patient data is sent to the distributed cache after a new instance of the distributed cache is created
 * Resetting the distributed cache in scenarios where the pending updates to the cache are larger than the channel size
+  * Channel are configured to at least support a full resync of the entire assigned patient cache
 
 ## Notification at Enterprise, Facility levels
 * Depending on configuration, all notifications generated at a lower level can be handle at the parent location level
