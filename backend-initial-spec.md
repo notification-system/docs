@@ -130,6 +130,8 @@ All code paths that need to be modified to support a new notification type are m
 * Notification service maintains only simpler notification data models. Larger custom data is only available in the history service.
   * This allows for hundreds of thousands or even millions of active notifications at a time.
 * Proper caching for almost all data that is read often
+* Separate MQTT publisher for notifications and all other updates. This makes sure that the notification pipeline is not delayed when the system is under high stress.
+* Configurable number of publishers to the message bus. More than one publisher was required when pushing over 10k messages per second with confirmed delivery.
 * Proper CORS policy for the current 'Production' server
 
 # System Debugging
