@@ -210,8 +210,9 @@ Per notification category the following notification settings are possible:
 * Works using TCP on Native Platforms
 * Uses websockets for Web
 
-## Integration Tests with Real Server
+## CI and Integration Tests
 * Working automation CI pipeline
+  * These are automated tests running against the client application, which is connected to a complete backend system.
   * Backend is tested on Windows and MacOS
   * Frontend is tested on Android, iOS, and Windows 
 * Automation code coverage report for the entire system (backend and frontend)
@@ -228,6 +229,15 @@ Per notification category the following notification settings are possible:
   * Each screen has an associated automation test helper that aids with all navigation/actions related to that screen
   * Very easy to read and maintain
   * [Sample Test](samples/automation_notification_settings.dart)
+
+### Additional CI/CD Details
+* Workflows to validate backend and frontend builds with code analysis
+* Workflow to generate the release web version of the main frontend application and the test tool application
+* Workflow to generate release Android builds
+* Workflow for one-click deployment of a Git branch of the full system onto a Linux machine using Production configuration
+  * Currently uses Docker Compose
+  * Option to clear all volumes/data or retain previous data after deployment
+  * Note: An initial provisioning workflow must be executed once on the target Linux machine before deployment
 
 ## Simple Frontend Setup
 * The Web version of the app automatically knows about all the endpoints within the system, no setup required.
