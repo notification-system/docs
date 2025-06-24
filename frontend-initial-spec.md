@@ -213,8 +213,8 @@ Per notification category the following notification settings are possible:
 ## CI and Integration Tests
 * Working automation CI pipeline
   * These are automated tests running against the client application, which is connected to a complete backend system.
-  * Backend is tested on Windows and MacOS
-  * Frontend is tested on Android, iOS, and Windows 
+  * Backend is tested on Linux, Windows and MacOS
+  * Frontend is tested on Android, iOS, Web(Chrome) and Windows
 * Automation code coverage report for the entire system (backend and frontend)
   * Frontend Coverage: 65.6% (8465 out of 12900 actionable lines)
   * Backend Coverage: 73.7% (11308 out of 15325 coverable lines)
