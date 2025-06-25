@@ -1,8 +1,18 @@
-# System Overview
+# Demo System Access
 
-## Downloads
+## Public Test System
+* Deployed system using 'Production' environment
+* Web App: vigilantus.us
+* Test Tool: test.vigilantus.us
+
+## Native Frontend Binaries
 * [Android](binaries/android-app.apk)
 * [Windows](binaries/windows-app.zip)
+
+# System Overview
+For full details see:
+* [Frontend Spec](frontend-initial-spec.md)
+* [Backend Spec](backend-initial-spec.md)
 
 ## High Level Key Points
 * Great developer experience
@@ -160,11 +170,6 @@ The notification pipeline is always monitored. If the notification pipeline is b
 * Ability to track and end any generated notification
 * One click performance testing
 * One click setup enviroment
-
-## Public Test System
-* Deployed system using 'Production' environment
-* Web App: vigilantus.us
-* Test Tool: test.vigilantus.us
 
 ## Under Construction
 * iOS persistent background connection
