@@ -228,7 +228,7 @@ Per notification category the following notification settings are possible:
 * Intuitive automation pattern
   * Each screen has an associated automation test helper that aids with all navigation/actions related to that screen
   * Very easy to read and maintain
-  * [Sample Test](samples/automation_notification_settings.dart)
+  * [Sample Test](samples/automation_notification_settings.md)
 
 ### Additional CI/CD Details
 * Workflows to validate backend and frontend builds with code analysis

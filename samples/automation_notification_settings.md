@@ -1,3 +1,4 @@
+```dart
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -85,3 +86,4 @@ Future<String> setupTestEnvironment(WidgetTester tester) async {
 
   return locationId;
 }
+```
