@@ -2,10 +2,10 @@
 
 ## Public Test System
 * Deployed system using 'Production' environment
-* Web App: vigilantus.us
-* Test Tool: test.vigilantus.us
+* [Web App](vigilantus.us/app)
+* [Web Test Tool](test.vigilantus.us)
 
-## Native Frontend Binaries
+### Native Frontend Binaries
 * [Android](binaries/android-app.apk)
 * [Windows](binaries/windows-app.zip)
 
